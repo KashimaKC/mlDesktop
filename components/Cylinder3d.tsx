@@ -15,7 +15,7 @@ function Cylinder3d( props: any ) {
             ref={ref}
             scale={1.5}
         >
-            <cylinderGeometry args={[1, 1, 1]} />
+            <cylinderGeometry args={[1, 1, 1, props.polyCount]} />
             <meshStandardMaterial
                 wireframe={props.wireframe}
                 color={props.color}

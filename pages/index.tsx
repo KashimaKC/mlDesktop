@@ -28,6 +28,9 @@ const Home:FC = () => {
   const [rotValY, setRotValY] = useState<number>(0);
   const [rotValZ, setRotValZ] = useState<number>(0);
 
+  const [polyVal, setPolyVal] = useState<number>(25);
+  const [lightIntensity, setLightIntensity] = useState<number>(1);
+
   const [open, setOpen] = useState<boolean>(false);
 
 
@@ -56,6 +59,8 @@ const Home:FC = () => {
     setRotValX(0.005);
     setRotValY(0);
     setRotValZ(0);
+    setPolyVal(25);
+    setLightIntensity(1);
   }
 
   {/* changes the values of each of the sliders, assigns a new value */}
@@ -81,6 +86,14 @@ const Home:FC = () => {
 
   const sliderChangeRotZ = (event: Event, newValue: number | number[]) => {
     setRotValZ(newValue as number);
+  }
+
+  const sliderChangePolygonCount = (event: Event, newValue: number | number[]) => {
+    setPolyVal(newValue as number);
+  }
+
+  const sliderChangeLightIntensity = (event: Event, newValue: number | number[]) => {
+    setLightIntensity(newValue as number);
   }
 
   const closeInfo = () => {
@@ -182,22 +195,43 @@ const Home:FC = () => {
 
         <section style={shapecard.sectionContainer}>
           <Canvas>
-            <pointLight position={[sliderValX, sliderValY, sliderValZ]} />
-            <Cylinder3d position={[0, 0, 0]} xRot={rotValX} yRot={rotValY} zRot={rotValZ} color={shapeColor} />
+            <pointLight position={[sliderValX, sliderValY, sliderValZ]} intensity={lightIntensity} />
+            <Cylinder3d 
+              position={[0, 0, 0]} 
+              xRot={rotValX} 
+              yRot={rotValY} 
+              zRot={rotValZ} 
+              color={shapeColor}
+              polyCount={polyVal}
+            />
           </Canvas>
         </section>
 
         <section style={shapecard.sectionContainer}>
           <Canvas>
-            <pointLight position={[sliderValX, sliderValY, sliderValZ]} />
-            <Cone3d position={[0, 0, 0]} xRot={rotValX} yRot={rotValY} zRot={rotValZ} color={shapeColor} />
+            <pointLight position={[sliderValX, sliderValY, sliderValZ]} intensity={lightIntensity} />
+            <Cone3d 
+              position={[0, 0, 0]} 
+              xRot={rotValX} 
+              yRot={rotValY} 
+              zRot={rotValZ} 
+              color={shapeColor} 
+              polyCount={polyVal}
+            />
           </Canvas>
         </section>
 
         <section style={shapecard.sectionContainer}>
           <Canvas>
-            <pointLight position={[sliderValX, sliderValY, sliderValZ]} />
-            <Torus3d position={[0, 0, 0]} xRot={rotValX} yRot={rotValY} zRot={rotValZ} color={shapeColor} />
+            <pointLight position={[sliderValX, sliderValY, sliderValZ]} intensity={lightIntensity} />
+            <Torus3d 
+              position={[0, 0, 0]} 
+              xRot={rotValX} 
+              yRot={rotValY} 
+              zRot={rotValZ} 
+              color={shapeColor} 
+              polyCount={polyVal}
+            />
           </Canvas>
         </section>
 
@@ -259,6 +293,37 @@ const Home:FC = () => {
         </section>
       </div>
 
+      {/* polygon adjustment slider */}
+      <div style={homepage.sliderContainer}>
+        <Box sx={{ width: 300, marginLeft: 10 }}>
+          <p>Adjust Polygon Count</p>
+          <Slider 
+            onChange={sliderChangePolygonCount}
+            value={polyVal}
+            aria-label="Polygon Count"
+            defaultValue={25}
+            step={1}
+            min={3}
+            max={25}
+            valueLabelDisplay="auto"
+          />
+        </Box>
+        <Box sx={{ width: 300, marginLeft: 10 }}>
+          <p>Adjust Light Intensity</p>
+          <Slider 
+            onChange={sliderChangeLightIntensity}
+            value={lightIntensity}
+            aria-label="Polygon Count"
+            defaultValue={1}
+            step={1}
+            min={0}
+            max={10}
+            valueLabelDisplay="auto"
+          />
+        </Box>
+      </div>
+
+      {/* footer content */}
       <footer style={homepage.footer as React.CSSProperties}>
         <section style={homepage.footerContent(false)}>Created By: Joshua Maraun</section>
         <section style={homepage.footerContent(true)}>Here are the technologies I used:</section>

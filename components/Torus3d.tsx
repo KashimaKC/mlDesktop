@@ -19,7 +19,7 @@ function Torus3d( props: any ) {
             onPointerOver={(event) => hover(true)}
             onPointerOut={(event) => hover(false)}
         >
-            <torusGeometry args={[10, 2]}/>
+            <torusGeometry args={[10, 2, props.polyCount, props.polyCount]}/>
             <meshStandardMaterial
                 wireframe={props.wireframe}
                 color={props.color}

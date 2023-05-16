@@ -16,7 +16,7 @@ function Cone3d( props: any ) {
             ref={ref}
             scale={1}
         >
-            <coneGeometry args={[1, 3, 20]}/>
+            <coneGeometry args={[1, 3, props.polyCount]}/>
             <meshStandardMaterial
                 wireframe={props.wireframe}
                 color={props.color}
